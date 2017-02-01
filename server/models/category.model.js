@@ -50,6 +50,6 @@ categorySchema.statics = {
 };
 
 /**
- * @typedef User
+ * @typedef Category
  */
 export default mongoose.model('categories', categorySchema);

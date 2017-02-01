@@ -3,6 +3,8 @@
  */
 
 import Product from '../models/product.model';
+import Debug from 'debug';
+const debug = Debug('product');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -28,6 +30,7 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    debug(err);
     res.status(statusCode).send(err);
   };
 }

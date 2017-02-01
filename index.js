@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import * as config from './config/env';
 import app from './config/express';
 import Promise from 'bluebird';
+import Debug from 'debug';
+const debug = Debug("index");
 
 
 // promisify mongoose
@@ -21,7 +23,7 @@ if (config.MONGOOSE_DEBUG) {
 
   // listen on port config.port
   app.listen(config.PORT, () => {
-    console.log(`server started on port ${config.PORT} (${config.ENV})`);
+    debug(`server started on port ${config.PORT} (${config.ENV})`);
   });
 
 

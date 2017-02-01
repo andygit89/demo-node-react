@@ -14,7 +14,11 @@ class CategoryApi {
 
     return new Promise((resolve, reject) => {
       category = Object.assign({}, category); // to avoid manipulating object passed in.
-      fetch('/api/category', {
+    let url = '/api/category';
+    if(category._id){
+      url= url+'/'+category._id
+    }
+      fetch(url, {
         method: 'post',
         headers: {
           'Accept': 'application/json',

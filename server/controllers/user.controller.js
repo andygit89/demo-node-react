@@ -1,5 +1,7 @@
 import User from '../models/user.model';
 var bcrypt = require('bcryptjs');
+import Debug from 'debug';
+const debug = Debug('user');
 
 
 
@@ -18,6 +20,7 @@ function respondWithResult(res, statusCode) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    debug(err);
     res.status(statusCode).send(err);
   };
 }

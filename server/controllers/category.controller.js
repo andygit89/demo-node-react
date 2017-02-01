@@ -2,6 +2,8 @@
  * Created by admin1 on 2/11/16.
  */
 import Category from '../models/category.model';
+import Debug from 'debug';
+const debug = Debug('category');
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -27,6 +29,7 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    debug(err)
     res.status(statusCode).send(err);
   };
 }
