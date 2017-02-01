@@ -1,0 +1,16 @@
+.sidebarBackground{background: rgba(168, 168, 168, 0.42); float: left}
+.main-layout{float: right; overflow-x: hidden; overflow-y: scroll;position: relative;padding-left: 100px; padding-right:100px;padding-top: 50px;box-sizing: border-box}
+.logo{height: 32px;width: 86px;}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+#main-content {
+  position: relative;
+  width: 100%;
+  padding-left:200px; /* padding-left must be the same as sidebar width */
+  box-sizing:border-box;
+  padding-top: 50px; /* padding-top must be the same as header height */
+}
