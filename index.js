@@ -11,7 +11,7 @@ Promise.promisifyAll(mongoose);
 
 
 // connect to mongo db
-mongoose.connect('mongodb://localhost/actilabsdb', { server: { socketOptions: { keepAlive: 1 } } });
+mongoose.connect('mongodb://localhost/demodb', { server: { socketOptions: { keepAlive: 1 } } });
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${config.DB}`);
 });
