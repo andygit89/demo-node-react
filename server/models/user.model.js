@@ -73,7 +73,17 @@ const UserSchema = new mongoose.Schema({
   status: {
     type: String,
     required: false
+  },
+  role: {
+    type: String,
+    required: false
+  },
+  isActive: {
+    type: Boolean,
+    required: false
   }
+
+
 }, {timestamps: true});
 
 /**

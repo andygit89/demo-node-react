@@ -27,10 +27,10 @@ function handleError(res, statusCode) {
 
 
 /**
- * Create new user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
+ * create user
+ * @param req
+ * @param res
+ * @param next
  */
 function create(req, res, next) {
   var usrObj = req.body;
@@ -44,10 +44,10 @@ function create(req, res, next) {
 }
 
 /**
- * Update existing user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
+ * update existing user
+ * @param req
+ * @param res
+ * @param next
  */
 function update(req, res, next) {
   const userId = req.params.userId;
@@ -58,10 +58,10 @@ function update(req, res, next) {
 }
 
 /**
- * Get user list.
- * @property {number} req.query.skip - Number of users to be skipped.
- * @property {number} req.query.limit - Limit number of users to be returned.
- * @returns {User[]}
+ * get user list
+ * @param req
+ * @param res
+ * @param next
  */
 function list(req, res, next) {
   User.find().sort({ createdAt: -1 }).select({_id:0}).execAsync()
@@ -80,4 +80,41 @@ function remove(req, res, next) {
     .catch(handleError(res));
 }
 
-export default { create, update, list, remove };
+
+/**
+ * Get user listbyrole.
+ */
+function listByRole(req, res, next) {
+  User.aggregate([
+    { $match: {role:'admin'} },
+    {
+      $project:
+      {
+        firstname: { $toLower: "$firstname" },
+        lastname:{$toLower: "$lastname"},
+        email:1,
+        postcode:1,
+        updatedAt : 1,
+        createdAt : 1,
+        address_1 : 1,
+        mobileNumber : 1,
+        isActive : true,
+        country : 1,
+        postcode : 1,
+        city : 1,
+        role : 1,
+        address_2 : 1,
+        photoUrl : 1,
+        photoName : 1,
+        menus : 1,
+        deactivatedAt:1
+      }
+    },
+    { $sort: {isActive: -1, firstname:1 } }
+
+  ]).execAsync()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export default { create, update, list, remove, listByRole };
